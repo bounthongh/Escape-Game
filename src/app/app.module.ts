@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
     ReservationGetComponent,
     ReservationEditComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
