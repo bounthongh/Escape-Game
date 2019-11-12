@@ -10,15 +10,15 @@ import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
     {
-      path: 'product/create',
+      path: 'reservation/create',
       component: ReservationAddComponent
     },
     {
-      path: 'edit/:id',
+      path: 'reservation/:id',
       component: ReservationGetComponent
     },
     {
-      path: 'products',
+      path: 'reservations',
       component: ReservationEditComponent
     },
     {
