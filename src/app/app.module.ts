@@ -10,13 +10,15 @@ import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { ProductAddComponent } from './product-add/product-add.component';
 import { ProductGetComponent } from './product-get/product-get.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductAddComponent,
     ProductGetComponent,
-    ProductEditComponent
+    ProductEditComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

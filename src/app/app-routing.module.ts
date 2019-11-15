@@ -5,8 +5,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProductAddComponent } from './product-add/product-add.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductGetComponent } from './product-get/product-get.component';
-
+import { HomePageComponent } from './home-page/home-page.component';
 const routes: Routes = [
+
+  { path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  { path: 'home',
+    component: HomePageComponent
+  },
   {
     path: 'product/create',
     component: ProductAddComponent
