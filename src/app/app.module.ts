@@ -6,6 +6,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsService } from './products.service';
+import { ApiService } from './api.service';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
@@ -47,7 +48,6 @@ import {
   MatToolbarModule,
   MatTooltipModule,
 } from '@angular/material';
-import { HourListComponent } from './hour-list/hour-list.component';
 
 @NgModule({
   declarations: [
@@ -55,8 +55,7 @@ import { HourListComponent } from './hour-list/hour-list.component';
     ProductAddComponent,
     ProductGetComponent,
     ProductEditComponent,
-    HomePageComponent,
-    HourListComponent
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
@@ -102,10 +101,8 @@ import { HourListComponent } from './hour-list/hour-list.component';
 
   ],
 
-  entryComponents: [
-    HourListComponent
-  ],
-  providers: [ProductsService],
+  entryComponents: [ ],
+  providers: [ProductsService, ApiService],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   bootstrap: [AppComponent],
 })

@@ -6,10 +6,27 @@ import {HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ApiService {
-  baseURL = 'http://localhost:3000/api/';
-  constructor(private http:HttpClient) { }
+  baseURL = 'http://localhost:4000/';
+  constructor(private http: HttpClient) { }
 
   getAllData(apiItem: String): any {
- return this.http.get(this.baseURL+apiItem, {responseType: 'json'});
+    console.log("unuse")
+    // return this.http.get(this.baseURL+apiItem, {responseType: 'json'});
  }
+
+  public booking(item) {
+    const reservation = "reservation/add";
+    return this.http.post(this.baseURL+reservation, item,{responseType: 'json'});
+  }
+
+  public getBooking() {
+    const reservation = "reservation/";
+    return this.http.get(this.baseURL+reservation, {responseType: 'json'});
+  }
+
+  public getBookingByDay(day: Number) {
+    const reservation = "reservation/";
+    return this.http.get(this.baseURL+reservation+day, {responseType: 'json'});
+  }
+
 }

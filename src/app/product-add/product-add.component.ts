@@ -4,8 +4,7 @@ import { ProductsService } from '../products.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { HourListComponent } from '../hour-list/hour-list.component';
-
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-product-add',
@@ -17,8 +16,31 @@ export class ProductAddComponent implements OnInit {
   events: string[] = [];
   angForm: FormGroup;
   value: Date;
+  availableHour = [];
+  selected = '';
+  selectedValue: string;
+
+  hourlist: string[] = [
+    '08:00',
+    '10:00',
+    '12:30',
+    '16:00',
+    '18:30',
+    '21:30',
+    '00:00',
+    '03:00',
+    '05:30',
+  ];
+
+  salles: string[] = [
+    'Salle Baba 1', 'Salle bobo 2', 'Salle popo 3', 'Salle koko4'
+  ];
+
+
+  day: Number;
+  hourlistFinal: string[] = [];
   constructor(private fb: FormBuilder, private ps: ProductsService,
-     private router: Router, public dialog: MatDialog) {
+     private router: Router, public dialog: MatDialog, private apiService: ApiService) {
     this.createForm();
   }
 
@@ -40,22 +62,39 @@ export class ProductAddComponent implements OnInit {
     );
   }
 
+
+
   // push event click on dialog
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
-    this.openDialog(event.value);
-  }
-
-  // open dialog with data push
-  openDialog(e): void {
-    const dialogRef = this.dialog.open(HourListComponent, {
-      width: '250px',
-      data: { date: e }
+    const day = new Date(event.value).getTime();
+    this.day = day;
+    this.apiService.getBookingByDay(day).subscribe(res => {
+      this.hourlistFinal = [];
+      const unavalable = Object.values(res);
+      this.hourlist.forEach(element => {
+        if (unavalable.indexOf(element) < 0) {
+          this.hourlistFinal.push(element);
+        }
+      });
+    }, err => {
+      console.log(err)
     });
-
-    /*dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });*/
   }
+
+  sendData(data: any) {
+    console.log(data);
+    const item = {
+      "day": this.day,
+      "hours": data
+    }
+    this.apiService.booking(item).subscribe(res => {
+      console.log(res)
+  }, err => {
+    console.log(err)
+  });
+
+  }
+
 
   ngOnInit() {
   }

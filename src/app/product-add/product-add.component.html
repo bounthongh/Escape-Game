@@ -1,15 +1,32 @@
 <!-- product-add.component.html -->
-<div class="calendar">
-  <mat-form-field>
-<input matInput [matDatepicker]="picker"
-(dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" placeholder="Choose a date">
-<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-<mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
-</mat-form-field>
-</div>
+
+<!--<mat-form-field>
+    <mat-label>List de Salles</mat-label>
+    <mat-select [(ngModel)]="selectedValue" name="food">
+      <mat-option *ngFor="let salle of salles" [value]="salle">
+        {{salle}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="calendar" *ngIf="selectedValue">
+      <mat-form-field>
+    <input matInput [matDatepicker]="picker" (dateChange)="addEvent('change', $event)" placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field *ngIf="hourlistFinal.length > 0">
+      <mat-label>Hours</mat-label>
+      <mat-select>
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let hours of hourlistFinal" (click)="sendData(hours)">{{hours}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    </div> -->
 
 <div class="card">
     <div class="card-body">
+
       <form [formGroup]="angForm" novalidate>
         <div class="form-group">
           <label class="col-md-4">Product Name</label>
