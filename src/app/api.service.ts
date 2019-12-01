@@ -14,6 +14,8 @@ export class ApiService {
     // return this.http.get(this.baseURL+apiItem, {responseType: 'json'});
  }
 
+
+
   public booking(item) {
     const reservation = "reservation/add";
     return this.http.post(this.baseURL+reservation, item,{responseType: 'json'});
@@ -21,6 +23,11 @@ export class ApiService {
 
   public getBooking() {
     const reservation = "reservation/";
+    return this.http.get(this.baseURL+reservation, {responseType: 'json'});
+  }
+
+  public getAllBooking() {
+    const reservation = "reservation/reservate";
     return this.http.get(this.baseURL+reservation, {responseType: 'json'});
   }
 

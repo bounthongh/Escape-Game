@@ -1,28 +1,91 @@
 <!-- product-add.component.html -->
+<app-navbar></app-navbar>
 
-<mat-form-field>
-    <mat-label>List de Salles</mat-label>
-    <mat-select [(ngModel)]="selectedValue" name="food">
-      <mat-option *ngFor="let salle of salles" [value]="salle">
-        {{salle}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
 
-  <div class="calendar" *ngIf="selectedValue">
-      <mat-form-field>
-    <input matInput [matDatepicker]="picker" (dateChange)="addEvent('change', $event)" placeholder="Choose a date">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field *ngIf="hourlistFinal.length > 0">
-      <mat-label>Hours</mat-label>
-      <mat-select>
-        <mat-option>None</mat-option>
-        <mat-option *ngFor="let hours of hourlistFinal" (click)="sendData(hours)">{{hours}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    </div>
+    <div id="booking" class="section">
+        <div class="section-center">
+          <div class="container">
+            <div class="row">
+              <div class="booking-cta">
+                <h1>Make Your Reservation</h1>
+              </div>
+
+              <br/>
+              <div class="booking-form">
+                  <div class="col-md-12">
+                    <div class="form-group lightColor">
+                        <mat-form-field>
+                            <mat-label>List de Salles</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" name="food">
+                              <mat-option *ngFor="let salle of salles" [value]="salle">
+                                {{salle}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <br/>
+                        
+                          <div class="calendar lightColor" *ngIf="selectedValue">
+                              <mat-form-field>
+                            <input matInput [matDatepicker]="picker" (dateChange)="addEvent('change', $event)" placeholder="Choose a date">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field *ngIf="hourlistFinal.length > 0">
+                              <mat-label>Hours</mat-label>
+                              <mat-select>
+                                <mat-option>None</mat-option>
+                                <mat-option *ngFor="let hours of hourlistFinal" (click)="sendData(hours)">{{hours}}</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            </div>
+                        
+                    </div>
+                  </div>
+                  <!--<div class="col-md-2">
+                    <div class="form-group">
+                      <span class="form-label">Guests</span>
+                      <select class="form-control">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                      </select>
+                      <span class="select-arrow"></span>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <span class="form-label">Children</span>
+                      <select class="form-control">
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                      </select>
+                      <span class="select-arrow"></span>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <span class="form-label">Check In</span>
+                      <input class="form-control" type="date" required>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <span class="form-label">Check out</span>
+                      <input class="form-control" type="date" required>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-btn">
+                      <button class="submit-btn">Check availability</button>
+                    </div>
+                  </div>-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
 <div class="card">
     <div class="card-body">

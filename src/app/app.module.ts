@@ -15,39 +15,17 @@ import { ProductGetComponent } from './product-get/product-get.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { HomePageComponent } from './home-page/home-page.component';
 
+import {TableModule} from 'primeng/table';
+import { ChartModule } from 'primeng/chart';
+
 
 
 import {
-  MatAutocompleteModule,
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDatepickerModule,
-  MatDialogModule,
-  MatExpansionModule,
-  MatGridListModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatNativeDateModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  MatSnackBarModule,
-  MatStepperModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule,
+  MatButtonModule,  MatButtonToggleModule,  MatCardModule,
+  MatDatepickerModule,  MatGridListModule,
+  MatIconModule,  MatInputModule,
 } from '@angular/material';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +33,8 @@ import {
     ProductAddComponent,
     ProductGetComponent,
     ProductEditComponent,
-    HomePageComponent
+    HomePageComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -65,37 +44,15 @@ import {
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-
-
-    MatAutocompleteModule,
+    TableModule,
+    ChartModule,
     MatButtonModule,
     MatButtonToggleModule,
     MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
     MatDatepickerModule,
-    MatDialogModule,
-    MatExpansionModule,
     MatGridListModule,
     MatIconModule,
     MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSlideToggleModule,
-    MatSliderModule,
-    MatSnackBarModule,
-    MatStepperModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    MatNativeDateModule
   ],
   exports: [
 

@@ -4,6 +4,7 @@ const route = express.Router();
 
 // Require Product model in our routes module
 let Reservation = require('../models/ReservationTimes.js');
+const Reservate = require('../models/reservation');
 
 // Defined store route
 route.route('/add').post(function (req, res) {
@@ -30,7 +31,7 @@ route.route('/').get(function (req, res) {
 });
 
 // Get hours booking
-route.route('/:day').get(function (req, res) {
+/*route.route('/:day').get(function (req, res) {
   const id = req.params.day;
   const item = {
     "day": id
@@ -42,6 +43,28 @@ route.route('/:day').get(function (req, res) {
     });
       res.json(arrayHours);
   });
+});*/
+
+route.route('/reservationAdd').post(function (req, res) {
+  let reservate_ = new Reservate(req.body);
+  reservate_.save()
+  .then(reservate_ => {
+    res.status(200).json({'Reservat': 'USER has been added successfully'});
+  })
+  .catch(err => {
+  res.status(400).send("unable to save to database");
+  });
 });
+
+route.route('/Reservate').get(function (req, res) {
+  Reservate.find(function (err, result){
+    if(err){
+      console.log(err);
+    }
+    else {
+      res.json(result);
+    }
+  });
+})
 
 module.exports = route;
