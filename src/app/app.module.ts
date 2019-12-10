@@ -53,6 +53,7 @@ import {
 
 } from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ManagerPriceComponent } from './manager-price/manager-price.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     ProductGetComponent,
     ProductEditComponent,
     HomePageComponent,
-    NavbarComponent
+    NavbarComponent,
+    ManagerPriceComponent
   ],
   imports: [
     BrowserModule,

@@ -26,6 +26,16 @@ export class ApiService {
     return this.http.get(this.baseURL+reservation, {responseType: 'json'});
   }
 
+  public getPrice() {
+    const price = "price/";
+    return this.http.get(this.baseURL+price, {responseType: 'json'});
+  }
+  public updatePrice(price: any) {
+    console.log(price)
+    const priceUrl = "price/update";
+    return this.http.put(this.baseURL+priceUrl,price, {responseType: 'json'});
+  }
+
   public getAllBooking() {
     const reservation = "reservation/reservate";
     return this.http.get(this.baseURL+reservation, {responseType: 'json'});

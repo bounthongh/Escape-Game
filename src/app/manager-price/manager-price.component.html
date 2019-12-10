@@ -1,0 +1,31 @@
+<p-table [value]="prices" dataKey="vin" editMode="row">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Tarif</th>
+            <th>€€</th>
+            <th style="width:8em"></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-editing="editing" let-ri="rowIndex">
+        <tr [pEditableRow]="rowData">
+            <td>
+                {{rowData.tarif}}
+            </td>
+            <td>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="rowData.newPrice" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{rowData.price}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td style="text-align:center">
+                <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil" class="ui-button-info" (click)="onRowEditInit(rowData)"></button>
+                <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check" class="ui-button-success" style="margin-right: .5em" (click)="onRowEditSave(rowData)"></button>
+                <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times" class="ui-button-danger" (click)="onRowEditCancel(rowData, ri)"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

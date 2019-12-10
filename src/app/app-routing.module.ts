@@ -6,6 +6,7 @@ import { ProductAddComponent } from './product-add/product-add.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductGetComponent } from './product-get/product-get.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { ManagerPriceComponent } from './manager-price/manager-price.component';
 const routes: Routes = [
 
   { path: '',
@@ -26,7 +27,12 @@ const routes: Routes = [
   {
     path: 'products',
     component: ProductGetComponent
+  },
+  {
+    path: 'price',
+    component: ManagerPriceComponent
   }
+
 ];
 
 @NgModule({
