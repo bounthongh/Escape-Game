@@ -7,6 +7,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductGetComponent } from './product-get/product-get.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ManagerPriceComponent } from './manager-price/manager-price.component';
+import { StatsComponent } from './stats/stats.component';
 const routes: Routes = [
 
   { path: '',
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'price',
     component: ManagerPriceComponent
+  },
+  {
+    path: 'stats',
+    component: StatsComponent
   }
 
 ];

@@ -1,40 +1,29 @@
-
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Reservate } from '../models/Reservate';
 
 @Component({
-  selector: 'app-product-get',
-  templateUrl: './product-get.component.html',
-  styleUrls: ['./product-get.component.css']
+  selector: 'app-stats',
+  templateUrl: './stats.component.html',
+  styleUrls: ['./stats.component.css']
 })
-export class ProductGetComponent implements OnInit {
-
+export class StatsComponent implements OnInit {
   reservate: any;
   cols: any[];
   data: any;
   vr: any;
   age: any;
-
-  headElements = ["Acheteur", "Game", "Spectateur"];
   constructor(private ps: ApiService) { }
 
   ngOnInit() {
-
     this.ps
       .getAllBooking()
       .subscribe((data: Reservate[]) => {
         this.reservate = data;
-        // this.drawChart(data);
+        this.drawChart(data);
     });
-
-    this.cols = [
-      { field: 'Acheteur.Nom', header: 'Nom' },
-      { field: 'Game.Nom', header: 'Jeux' },
-      { field: 'Reservation.length', header: 'Nbr de joueur' }
-  ];
-
   }
+
   drawChart(data: Reservate[]) {
     const Madame = [];
     const Monsieurs = [];
@@ -128,6 +117,5 @@ export class ProductGetComponent implements OnInit {
                       ]
                   };
   }
-
 
 }

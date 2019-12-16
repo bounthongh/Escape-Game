@@ -54,6 +54,7 @@ import {
 } from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ManagerPriceComponent } from './manager-price/manager-price.component';
+import { StatsComponent } from './stats/stats.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { ManagerPriceComponent } from './manager-price/manager-price.component';
     ProductEditComponent,
     HomePageComponent,
     NavbarComponent,
-    ManagerPriceComponent
+    ManagerPriceComponent,
+    StatsComponent
   ],
   imports: [
     BrowserModule,

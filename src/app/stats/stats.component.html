@@ -1,0 +1,18 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <h2>Répartition par sexe</h2>
+      <div class=""><p-chart type="doughnut" [data]="data"></p-chart></div>
+    </div>
+    <div class="col-6">
+      <h2>Répartition de clients par version (VR or not VR)</h2>
+      <div class=""><p-chart type="pie" [data]="vr"></p-chart></div>
+    </div>
+  </div>
+</div>
+
+
+
+          <h2 style="text-align:center">Répartition par tranche d’âge</h2>
+          <p-chart type="polarArea" [data]="age"></p-chart>
