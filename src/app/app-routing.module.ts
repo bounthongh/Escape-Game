@@ -8,6 +8,7 @@ import { ProductGetComponent } from './product-get/product-get.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ManagerPriceComponent } from './manager-price/manager-price.component';
 import { StatsComponent } from './stats/stats.component';
+import { ReservationformComponent } from './reservationform/reservationform.component'
 const routes: Routes = [
 
   { path: '',
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'stats',
     component: StatsComponent
+  },
+  {
+    path: 'reservation',
+    component: ReservationformComponent
   }
 
 ];

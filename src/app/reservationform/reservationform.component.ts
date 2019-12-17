@@ -13,6 +13,7 @@ import { ApiService } from '../api.service';
 export class ReservationformComponent implements OnInit {
   displayTable: boolean;
   availableHour = [];
+  reservationForm: FormGroup;
 
   hourlist: string[] = [
     '08:00-09:00',
@@ -35,8 +36,17 @@ export class ReservationformComponent implements OnInit {
   day: Number;
   hourlistFinal: string[] = [];
 
-  constructor(private router: Router, public dialog: MatDialog, private apiService: ApiService) { }
+  constructor(private router: Router, public dialog: MatDialog, private apiService: ApiService, private fb: FormBuilder) {
+    this.createForm();
+}
 
+createForm() {
+  this.reservationForm = this.fb.group({
+    ProductName: ['', Validators.required ],
+    ProductDescription: ['', Validators.required ],
+    ProductPrice: ['', Validators.required ]
+  });
+}
   ngOnInit() {
     this.displayTable = false;
   }
