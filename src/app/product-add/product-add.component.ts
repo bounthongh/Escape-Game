@@ -19,7 +19,7 @@ export class ProductAddComponent implements OnInit {
   availableHour = [];
   selected = '';
   selectedValue: string;
-
+  salles: string[];
   hourlist: string[] = [
     '08:00',
     '10:00',
@@ -31,10 +31,9 @@ export class ProductAddComponent implements OnInit {
     '03:00',
     '05:30',
   ];
+  
 
-  salles: string[] = [
-    'Salle Baba 1', 'Salle bobo 2', 'Salle popo 3', 'Salle koko4'
-  ];
+  
 
 
   day: Number;
@@ -45,6 +44,9 @@ export class ProductAddComponent implements OnInit {
   }
 
   createForm() {
+    this.salles = [
+    'Salle Baba 1', 'Salle bobo 2', 'Salle popo 3', 'Salle koko4'
+  ];
     this.angForm = this.fb.group({
       ProductName: ['', Validators.required ],
       ProductDescription: ['', Validators.required ],

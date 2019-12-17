@@ -18,6 +18,9 @@ import {CalendarModule} from 'primeng/calendar';
 import {TableModule} from 'primeng/table';
 import { ChartModule } from 'primeng/chart';
 
+import {DropdownModule} from 'primeng/dropdown';
+
+
 
 
 import {
@@ -108,7 +111,8 @@ import { ReservationformComponent } from './reservationform/reservationform.comp
     MatToolbarModule,
     MatTooltipModule,
     MatNativeDateModule,
-    CalendarModule
+    CalendarModule,
+    DropdownModule
 
   ],
   exports: [

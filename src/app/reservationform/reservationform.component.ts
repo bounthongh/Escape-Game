@@ -5,6 +5,15 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiService } from '../api.service';
 
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
+
+
+
 @Component({
   selector: 'app-reservationform',
   templateUrl: './reservationform.component.html',
@@ -14,6 +23,9 @@ export class ReservationformComponent implements OnInit {
   displayTable: boolean;
   availableHour = [];
   reservationForm: FormGroup;
+  public cols: any[];
+
+  headElements = ["Acheteur", "Game", "Spectateur"];
 
   hourlist: string[] = [
     '08:00-09:00',
@@ -40,6 +52,7 @@ export class ReservationformComponent implements OnInit {
     this.createForm();
 }
 
+
 createForm() {
   this.reservationForm = this.fb.group({
     ProductName: ['', Validators.required ],
@@ -48,6 +61,11 @@ createForm() {
   });
 }
   ngOnInit() {
+    this.cols = [
+      { field: 'Acheteur.Nom', header: 'Nom' },
+      { field: 'Game.Nom', header: 'Jeux' },
+      { field: 'Reservation.length', header: 'Nbr de joueur' }
+  ];
     this.displayTable = false;
   }
   showTable() {
@@ -75,5 +93,5 @@ createForm() {
     });
   }
 
-
+  
 }
