@@ -14,7 +14,7 @@ import { ProductAddComponent } from './product-add/product-add.component';
 import { ProductGetComponent } from './product-get/product-get.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { HomePageComponent } from './home-page/home-page.component';
-
+import {CalendarModule} from 'primeng/calendar';
 import {TableModule} from 'primeng/table';
 import { ChartModule } from 'primeng/chart';
 
@@ -55,6 +55,7 @@ import {
 import { NavbarComponent } from './navbar/navbar.component';
 import { ManagerPriceComponent } from './manager-price/manager-price.component';
 import { StatsComponent } from './stats/stats.component';
+import { ReservationformComponent } from './reservationform/reservationform.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { StatsComponent } from './stats/stats.component';
     HomePageComponent,
     NavbarComponent,
     ManagerPriceComponent,
-    StatsComponent
+    StatsComponent,
+    ReservationformComponent
   ],
   imports: [
     BrowserModule,
@@ -105,7 +107,8 @@ import { StatsComponent } from './stats/stats.component';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    CalendarModule
 
   ],
   exports: [
