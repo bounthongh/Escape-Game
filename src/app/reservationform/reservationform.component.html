@@ -3,8 +3,14 @@
 <p>reservationform works!</p>
 
 <div class="ui-g-12 ui-md-4">
-    <h3>Icon</h3>
-    <p-calendar [(ngModel)]="date3" [showIcon]="true"></p-calendar>
+    <mat-form-field>
+        <mat-label>List de Salles</mat-label>
+        <mat-select [(ngModel)]="selectedValue" name="food">
+          <mat-option *ngFor="let salle of salles" [value]="salle">
+            {{salle}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 </div>
 <div class="ui-g-12 ui-md-4"></div>
 <select type="text" id="salle" class="form-control" formControlName="salle" onselect="showTable()">
