@@ -1,2 +1,36 @@
 <app-navbar></app-navbar>
+<div class="container">
 <p>reservationform works!</p>
+
+<div class="ui-g-12 ui-md-4">
+    <h3>Icon</h3>
+    <p-calendar [(ngModel)]="date3" [showIcon]="true"></p-calendar>
+</div>
+<div class="ui-g-12 ui-md-4"></div>
+<select type="text" id="salle" class="form-control" formControlName="salle" onselect="showTable()">
+    <option selected="Nomade">Salle1</option>
+    <option>Salle2</option>
+    <option>Salle3</option>
+    <option>Salle4</option>
+    </select>
+
+</div>
+<p-table [value]="reservation" [(visible)]="displayTable">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Vin</th>
+            <th>Year</th>
+            <th>Brand</th>
+            <th>Color</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-reservation>
+        <tr>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>
