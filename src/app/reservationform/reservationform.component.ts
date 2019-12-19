@@ -40,11 +40,8 @@ export class ReservationformComponent implements OnInit {
     '18:00-19:00',
     '19:00-20:00',
   ];
-
-  salles: string[] = [
-    'Salle Baba 1', 'Salle bobo 2', 'Salle popo 3', 'Salle koko4'
-  ];
-
+  rooms: any[];
+  selectedRoom: any;
   day: Number;
   hourlistFinal: string[] = [];
 
@@ -61,6 +58,14 @@ createForm() {
   });
 }
   ngOnInit() {
+    this.rooms = [
+      { label: 'Salle Baba 1', value: {name: 'Baba 1'} },
+      { label: 'Salle bobo 2', value: {name: 'bobo 2'} },
+      { label: 'Salle popo 3', value: {name: 'popo 3'} },
+      { label: 'Salle koko4', value: {name: 'koko4'} }
+     
+    ];
+    this.selectedRoom = this.rooms[1];
     this.cols = [
       { field: 'Acheteur.Nom', header: 'Nom' },
       { field: 'Game.Nom', header: 'Jeux' },
@@ -73,8 +78,12 @@ createForm() {
     this.generateTable();
   }
 
+  test()
+  {
+    console.log('Hello Test');
+  }
   generateTable() {
-
+    console.log('HELLO FRIEND');
   }
 
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {

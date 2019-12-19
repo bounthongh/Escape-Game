@@ -4,23 +4,22 @@
     <div class="row">
 <div class="form-group lightColor">
 <div class="col-6">
-    <p-calendar [(ngModel)]="Date" [inline]="true"></p-calendar>
-</div>
-<div class="col-6">
-<select *ngIf="Date" multiple formControlName="salles">
-    <option *ngFor="let suit of salles">{{suit}}</option>
-  </select>
-</div>
+ <p-dropdown [options]="rooms"  [(ngModel)]="Room"></p-dropdown>
 </div>
 
 <div class="col-6">
-<p-table #dt [columns]="cols" [value]="reservate" [paginator]="true" [rows]="20" [globalFilterFields]="['Game.Nom', 'Acheteur.Nom', 'Reservation.length']">
+    <p-calendar *ngIf="Room" [(ngModel)]="Date"></p-calendar>
+</div>
+<div class="col-6">
+
+<p-table #dt *ngIf="Date" [columns]="cols" [value]="reservate" [paginator]="true" [rows]="20">
     <ng-template pTemplate="caption">
             <div style="text-align: right">
                 <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
                 <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
             </div>
         </ng-template>
+
     <ng-template pTemplate="header" let-columns>
             <tr>
                     <th *ngFor="let col of columns" [pSortableColumn]="col.field">
