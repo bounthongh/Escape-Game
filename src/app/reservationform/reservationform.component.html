@@ -1,24 +1,24 @@
 <app-navbar></app-navbar>
-<p>reservationform works!</p>
 <div class="container">
     <div class="row">
 <div class="form-group lightColor">
+    <button type="button3" pButton label="Reserver" style="background-color:#00567c;" (click)="test()"></button>
 <div class="col-6">
- <p-dropdown placeholder="liste des salles" [options]="rooms" [(ngModel)]="Room"></p-dropdown>
-</div>
-
-<div class="col-6">
-    <p-calendar placeholder="Date de reservation" *ngIf='Room' [(ngModel)]="Date"></p-calendar>
+    <p-dropdown placeholder="liste des salles" [options]="rooms" (onChange)="selectedroom($event)" [(ngModel)]="Room"></p-dropdown>
 </div>
 <div class="col-6">
-    <p-dropdown *ngIf='Date' placeholder="Horraire" [options]="hourlist" [(ngModel)]="Hour"></p-dropdown>
-   </div>
+    <p-calendar placeholder="Date de reservation" onSelect="onChange()" *ngIf='Room' [(ngModel)]="Date"></p-calendar>
+</div>
+<!--
 <div class="col-6">
-
-<p-table #dt  [columns]="cols" [value]="reservate" [paginator]="true" [rows]="20">
+    <p-dropdown placeholder="Horraire" *ngIf='Date' [options]="hourlist" [(ngModel)]="Hour"></p-dropdown>
+</div>
+-->
+<div class="col-6">
+<p-table #dt *ngIf="Date"  [columns]="cols" [value]="reservate" [paginator]="true" [rows]="20">
     <ng-template pTemplate="caption">
         Reservation
-        </ng-template>
+    </ng-template>
     <ng-template pTemplate="header" let-columns>
             <tr>
                 <th *ngFor="let col of columns" [pSortableColumn]="col.field">
@@ -26,13 +26,73 @@
                 </th>
             </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <ng-template pTemplate="body" let-rowData let-i="rowIndex" let-columns="columns">
         <tr [pSelectableRow]="rowData">
-            <td>{{rowData.Acheteur.Nom}}</td>
-            <td>{{rowData.Game.Nom}}</td>
-            <td>{{rowData.Reservation.length}}</td>
+            <td>{{rowData.date}}</td>
+            <td>rowData.salles</td>
+            <td>rowData.horraire</td>
+            <td>rowData.maxjoueurs</td>
+            <td>rowData.Vr</td>
+            <td><button type="button3" pButton label="Reserver" style="background-color:#00567c;" (click)="reservation(i)"></button></td>
         </tr>
     </ng-template>
   </p-table>
-</div>
+  </div>
+  <p-dialog [style]="{width: '500px', minWidth: '400px'}" header="Formulaire de réservation" [(visible)]="displayform" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '20%'}">
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <p-calendar placeholder="Date de reservation" [(ngModel)]="Date"></p-calendar>
+            </div>
+            <div class="form-group col-md-6">
+              <p-dropdown placeholder="Horraire" [options]="hourlist"></p-dropdown>
+            </div>
+          </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputNom">Nom</label>
+            <input type="text" class="form-control" id="inputNom" placeholder="Nom">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPrenom">Prénom</label>
+            <input type="text" class="form-control" id="inputPrenom" placeholder="Prénom">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputEmail">E-Mail</label>
+          <input type="email" class="form-control" id="inputEmail" placeholder="blabla@chocolat.com">
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputSalle">Salle</label>
+            <select class="form-control"  id="salle">
+                <option>Salle Baba 1</option>
+                <option>Salle bobo 2</option>
+                <option>Salle popo 3</option>
+                <option>Salle koko 4</option>
+                </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputJoueurs">Joueurs</label>
+            <select id="Maxparticipant" placeholder="nombre de joueur" class="form-control">
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <!-- ATTENTION VALEUR EN BRUT POUR LINSTANT-->
+            </select>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputAge">Age</label>
+            <input type="number" min="18" max="110" class="form-control" id="inputAge">
+          </div>
+        </div>
+        <button type="submit" class="btn" style="background-color: red;">Annuler</button>
+        <button type="submit" class="btn btn-primary">Valider</button>   
+      </form>
+
+</p-dialog>
 </div>

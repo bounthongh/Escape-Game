@@ -17,7 +17,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import {CalendarModule} from 'primeng/calendar';
 import {TableModule} from 'primeng/table';
 import { ChartModule } from 'primeng/chart';
-
+import {DialogModule} from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
 
 
@@ -112,7 +112,8 @@ import { ReservationformComponent } from './reservationform/reservationform.comp
     MatTooltipModule,
     MatNativeDateModule,
     CalendarModule,
-    DropdownModule
+    DropdownModule,
+    DialogModule
 
   ],
   exports: [
