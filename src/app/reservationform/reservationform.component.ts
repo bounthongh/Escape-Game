@@ -4,14 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiService } from '../api.service';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
+import { Reservate } from '../models/Reservate';
 
 
 @Component({
@@ -19,15 +12,22 @@ export interface PeriodicElement {
   templateUrl: './reservationform.component.html',
   styleUrls: ['./reservationform.component.css']
 })
+
 export class ReservationformComponent implements OnInit {
+  reservate: any;
   displayTable: boolean;
   availableHour = [];
   reservationForm: FormGroup;
   public cols: any[];
+  Date: string;
+
 
   headElements = ["Acheteur", "Game", "Spectateur"];
 
-  hourlist: string[] = [
+  hourlist: any[];
+  selectedHour: any;
+
+  hourlist2: string[] = [
     '08:00-09:00',
     '09:00-10:00',
     '10:00-11:00',
@@ -45,10 +45,17 @@ export class ReservationformComponent implements OnInit {
   day: Number;
   hourlistFinal: string[] = [];
 
-  constructor(private router: Router, public dialog: MatDialog, private apiService: ApiService, private fb: FormBuilder) {
+  constructor(private router: Router, private ps: ApiService, private fb: FormBuilder) {
+    this.ps
+    .getAllBooking()
+    .subscribe((data: Reservate[]) => {
+      this.reservate = data;
+      // this.drawChart(data);
+  });
     this.createForm();
-}
-
+    //let today = new Date();
+    //this.Date = today.getMonth() + '/' + today.getDate() + '/' + today.getFullYear();
+  }
 
 createForm() {
   this.reservationForm = this.fb.group({
@@ -63,8 +70,8 @@ createForm() {
       { label: 'Salle bobo 2', value: {name: 'bobo 2'} },
       { label: 'Salle popo 3', value: {name: 'popo 3'} },
       { label: 'Salle koko4', value: {name: 'koko4'} }
-     
     ];
+    this.hourlist = [ {label: '08:00'}, {label: '10:00'},{label: '12:30'},{label: '16:00'} ,{label: '18:30'},{label: '21:30'},{label: '00:00'},{label: '03:00'},{label: '05:30'}];
     this.selectedRoom = this.rooms[1];
     this.cols = [
       { field: 'Acheteur.Nom', header: 'Nom' },
@@ -84,22 +91,6 @@ createForm() {
   }
   generateTable() {
     console.log('HELLO FRIEND');
-  }
-
-  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
-    const day = new Date(event.value).getTime();
-    this.day = day;
-    this.apiService.getBookingByDay(day).subscribe(res => {
-      this.hourlistFinal = [];
-      const unavalable = Object.values(res);
-      this.hourlist.forEach(element => {
-        if (unavalable.indexOf(element) < 0) {
-          this.hourlistFinal.push(element);
-        }
-      });
-    }, err => {
-      console.log(err)
-    });
   }
 
   

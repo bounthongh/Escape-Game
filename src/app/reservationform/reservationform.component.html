@@ -4,29 +4,27 @@
     <div class="row">
 <div class="form-group lightColor">
 <div class="col-6">
- <p-dropdown [options]="rooms"  [(ngModel)]="Room"></p-dropdown>
+ <p-dropdown placeholder="liste des salles" [options]="rooms" [(ngModel)]="Room"></p-dropdown>
 </div>
 
 <div class="col-6">
-    <p-calendar *ngIf="Room" [(ngModel)]="Date"></p-calendar>
+    <p-calendar placeholder="Date de reservation" *ngIf='Room' [(ngModel)]="Date"></p-calendar>
 </div>
 <div class="col-6">
+    <p-dropdown *ngIf='Date' placeholder="Horraire" [options]="hourlist" [(ngModel)]="Hour"></p-dropdown>
+   </div>
+<div class="col-6">
 
-<p-table #dt *ngIf="Date" [columns]="cols" [value]="reservate" [paginator]="true" [rows]="20">
+<p-table #dt  [columns]="cols" [value]="reservate" [paginator]="true" [rows]="20">
     <ng-template pTemplate="caption">
-            <div style="text-align: right">
-                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-            </div>
+        Reservation
         </ng-template>
-
     <ng-template pTemplate="header" let-columns>
             <tr>
-                    <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-                        {{col.header}}
-                        <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
-                    </th>
-                </tr>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                    {{col.header}}
+                </th>
+            </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
         <tr [pSelectableRow]="rowData">
