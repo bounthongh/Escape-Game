@@ -4,10 +4,10 @@
 <div class="form-group lightColor">
     <button type="button3" pButton label="Reserver" style="background-color:#00567c;" (click)="test()"></button>
 <div class="col-6">
-    <p-dropdown placeholder="liste des salles" [options]="rooms" (onChange)="selectedroom($event)" [(ngModel)]="Room"></p-dropdown>
+    <p-dropdown placeholder="liste des salles" [options]="rooms" (onChange)="choixSalle($event)" [(ngModel)]="Room"></p-dropdown>
 </div>
 <div class="col-6">
-    <p-calendar placeholder="Date de reservation" onSelect="onChange()" *ngIf='Room' [(ngModel)]="Date"></p-calendar>
+    <p-calendar [(ngModel)]="Date" placeholder="Date de reservation" (onSelect)="choixDate($event)" *ngIf="Room"></p-calendar>
 </div>
 <!--
 <div class="col-6">
@@ -15,7 +15,7 @@
 </div>
 -->
 <div class="col-6">
-<p-table #dt *ngIf="Date"  [columns]="cols" [value]="reservate" [paginator]="true" [rows]="20">
+<p-table #dt *ngIf="Date" [columns]="cols" [value]="TableData" [paginator]="true" [rows]="20">
     <ng-template pTemplate="caption">
         Reservation
     </ng-template>
@@ -29,10 +29,10 @@
     <ng-template pTemplate="body" let-rowData let-i="rowIndex" let-columns="columns">
         <tr [pSelectableRow]="rowData">
             <td>{{rowData.date}}</td>
-            <td>rowData.salles</td>
-            <td>rowData.horraire</td>
-            <td>rowData.maxjoueurs</td>
-            <td>rowData.Vr</td>
+            <td>{{rowData.salle}}</td>
+            <td>{{rowData.creneaux}}</td>
+            <td>{{rowData.joueursMax}}</td>
+            <td>{{rowData.vr}}</td>
             <td><button type="button3" pButton label="Reserver" style="background-color:#00567c;" (click)="reservation(i)"></button></td>
         </tr>
     </ng-template>
@@ -42,7 +42,7 @@
     <form>
         <div class="form-row">
             <div class="form-group col-md-6">
-              <p-calendar placeholder="Date de reservation" [(ngModel)]="Date"></p-calendar>
+              <p-calendar placeholder="Date de reservation"></p-calendar>
             </div>
             <div class="form-group col-md-6">
               <p-dropdown placeholder="Horraire" [options]="hourlist"></p-dropdown>
@@ -93,6 +93,5 @@
         <button type="submit" class="btn" style="background-color: red;">Annuler</button>
         <button type="submit" class="btn btn-primary">Valider</button>   
       </form>
-
 </p-dialog>
 </div>

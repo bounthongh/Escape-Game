@@ -12,12 +12,21 @@ import { Reservate } from '../models/Reservate';
 })
 
 export class ReservationformComponent implements OnInit {
+
+  Date: string;
+  Salle: string;
+  Creneaux: string;
+  JoueurMax: number;
+  Vr: string;
+
+  TableData: any;
+
   reservate: any;
   displayTable: boolean;
   availableHour = [];
   reservationForm: FormGroup;
   public cols: any[];
-  Date: string;
+  
   public datatable: any[];
 
   headElements = ["Acheteur", "Game", "Spectateur"];
@@ -42,13 +51,12 @@ export class ReservationformComponent implements OnInit {
   displayform: boolean = false;
 
   constructor(private router: Router, private ps: ApiService, private fb: FormBuilder) {
-    this.ps
+    /*this.ps
     .getAllBooking()
     .subscribe((data: Reservate[]) => {
       this.reservate = data;
       this.displayform = false;
-      // this.drawChart(data);
-  });
+  });*/
     //this.createForm();
     //let today = new Date();
     //this.Date = today.getMonth() + '/' + today.getDate() + '/' + today.getFullYear();
@@ -63,10 +71,10 @@ createForm() {
 }
   ngOnInit() {
     this.rooms = [
-      { label: 'Salle Baba 1', value: {name: 'Baba 1', player: '7'} },
-      { label: 'Salle bobo 2', value: {name: 'bobo 2', player: '2'} },
-      { label: 'Salle popo 3', value: {name: 'popo 3', player: '4'} },
-      { label: 'Salle koko4', value: {name: 'koko4', player: '6'} }
+      { label: 'Salle Baba 1', value: {name: 'Salle Baba 1', player: '7', vr: 'non'} },
+      { label: 'Salle bobo 2', value: {name: 'Salle bobo 2', player: '2',  vr: 'non'} },
+      { label: 'Salle popo 3', value: {name: 'Salle popo 3', player: '4',  vr: 'oui'} },
+      { label: 'Salle koko4', value: {name: 'Salle koko4', player: '6',  vr: 'oui'} }
     ];
 
     this.hourlist = [ 
@@ -90,20 +98,26 @@ createForm() {
   ];
     this.displayTable = false;
   }
+  choixSalle(event: any)
+  {
+    console.log(event.value.name);
+    console.log(event.value.vr);
+    console.log(event.value.player);
+    this.Salle = event.value.name;
+    this.JoueurMax = event.value.player;
+    this.Vr = event.value.vr;
+  }
+
+  choixDate(event: any)
+  {
+    console.log(event);
+    this.Date = event;
+    this.displayTable = true;
+    this.generateTable();
+  }
+
   showTable() {
     this.displayTable = true;
-  }
-
-  onChange()
-  {
-    this.datatable.push();
-    console.log('hello');
-  }
-
-  selectedroom(event: any)
-  {
-    // renvois le nom de la salle avec le nombre de joueurs max
-    console.log(event.data);
   }
 
   save(){
@@ -117,5 +131,16 @@ createForm() {
 
   reservation(i) {
     //ouverture du form avec les données du tableaux
+  }
+
+  generateTable() {
+    var newArray = [];
+    for (let item of this.hourlist)
+    {
+      console.log('hello');
+      newArray.push({date: this.Date, salle: this.Salle, creneaux: item.value, joueursMax: this.JoueurMax, vr: this.Vr});
+    }
+    console.log(newArray);
+    this.TableData = newArray;
   }
 }
