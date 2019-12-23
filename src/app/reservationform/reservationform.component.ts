@@ -13,13 +13,14 @@ import { Reservate } from '../models/Reservate';
 
 export class ReservationformComponent implements OnInit {
 
-  Date: string;
+  Date: Date;
   Salle: string;
   Creneaux: string;
   JoueurMax: number;
   Vr: string;
 
   TableData: any;
+  RowTableData: any;
 
   reservate: any;
   displayTable: boolean;
@@ -70,6 +71,8 @@ createForm() {
   });*/
 }
   ngOnInit() {
+    this.TableData = null;
+    this.RowTableData = null;
     this.rooms = [
       { label: 'Salle Baba 1', value: {name: 'Salle Baba 1', player: '7', vr: 'non'} },
       { label: 'Salle bobo 2', value: {name: 'Salle bobo 2', player: '2',  vr: 'non'} },
@@ -106,6 +109,7 @@ createForm() {
     this.Salle = event.value.name;
     this.JoueurMax = event.value.player;
     this.Vr = event.value.vr;
+    this.generateTable();
   }
 
   choixDate(event: any)
@@ -124,12 +128,14 @@ createForm() {
     //pousse la donné vers l'api
   }
 
-  test()
-  {
-    this.displayform = true;
+  close(){
+    this.displayform=false;
   }
 
   reservation(i) {
+    this.displayform = true;
+    console.log(i);
+    this.RowTableData = this.TableData[i];
     //ouverture du form avec les données du tableaux
   }
 

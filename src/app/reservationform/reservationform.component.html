@@ -4,16 +4,11 @@
 <div class="form-group lightColor">
     <button type="button3" pButton label="Reserver" style="background-color:#00567c;" (click)="test()"></button>
 <div class="col-6">
-    <p-dropdown placeholder="liste des salles" [options]="rooms" (onChange)="choixSalle($event)" [(ngModel)]="Room"></p-dropdown>
+    <p-dropdown placeholder="liste des salles" [options]="rooms" (onChange)="choixSalle($event)" id="room" [(ngModel)]="Room"></p-dropdown>
 </div>
 <div class="col-6">
-    <p-calendar [(ngModel)]="Date" placeholder="Date de reservation" (onSelect)="choixDate($event)" *ngIf="Room"></p-calendar>
+    <p-calendar [(ngModel)]="Date"  id="date" placeholder="Date de reservation" (onSelect)="choixDate($event)" *ngIf="Room"></p-calendar>
 </div>
-<!--
-<div class="col-6">
-    <p-dropdown placeholder="Horraire" *ngIf='Date' [options]="hourlist" [(ngModel)]="Hour"></p-dropdown>
-</div>
--->
 <div class="col-6">
 <p-table #dt *ngIf="Date" [columns]="cols" [value]="TableData" [paginator]="true" [rows]="20">
     <ng-template pTemplate="caption">
@@ -38,59 +33,51 @@
     </ng-template>
   </p-table>
   </div>
-  <p-dialog [style]="{width: '500px', minWidth: '400px'}" header="Formulaire de réservation" [(visible)]="displayform" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '20%'}">
+  <p-dialog [style]="{width: '500px', minWidth: '400px'}" *ngIf="RowTableData" header="Formulaire de réservation" [(visible)]="displayform" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '20%'}">
     <form>
         <div class="form-row">
             <div class="form-group col-md-6">
               <p-calendar placeholder="Date de reservation"></p-calendar>
             </div>
             <div class="form-group col-md-6">
-              <p-dropdown placeholder="Horraire" [options]="hourlist"></p-dropdown>
+              <select class="form-control"  name="selectcreneaux" [(ngModel)]="RowTableData.creneaux">
+                <option selected="{{RowTableData.creneaux}}">{{RowTableData.creneaux}}</option>
+                  <option *ngFor="let item of hourlist">{{item.value}}</option>
+                </select>
             </div>
           </div>
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="inputNom">Nom</label>
-            <input type="text" class="form-control" id="inputNom" placeholder="Nom">
+            <input type="text" class="form-control" name="inputNom" placeholder="Nom">
           </div>
           <div class="form-group col-md-6">
             <label for="inputPrenom">Prénom</label>
-            <input type="text" class="form-control" id="inputPrenom" placeholder="Prénom">
+            <input type="text" class="form-control" name="inputPrenom" placeholder="Prénom">
           </div>
         </div>
         <div class="form-group">
           <label for="inputEmail">E-Mail</label>
-          <input type="email" class="form-control" id="inputEmail" placeholder="blabla@chocolat.com">
+          <input type="email" class="form-control" name="inputEmail" placeholder="blabla@chocolat.com">
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="inputSalle">Salle</label>
-            <select class="form-control"  id="salle">
-                <option>Salle Baba 1</option>
-                <option>Salle bobo 2</option>
-                <option>Salle popo 3</option>
-                <option>Salle koko 4</option>
-                </select>
+            <select class="form-control"  [(ngModel)]="RowTableData.salle" name="selectedsalle">
+              <option selected="{{RowTableData.salle}}">{{RowTableData.salle}}</option>
+                <option *ngFor="let item of rooms">{{item.value.name}}</option>
+              </select>
           </div>
           <div class="form-group col-md-4">
-            <label for="inputJoueurs">Joueurs</label>
-            <select id="Maxparticipant" placeholder="nombre de joueur" class="form-control">
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-              <option>7</option>
-              <option>8</option>
-              <!-- ATTENTION VALEUR EN BRUT POUR LINSTANT-->
-            </select>
+            <label for="inputAge">Nb Joueur</label>
+            <input type="number" min="2" max="{{RowTableData.joueursMax}}" name="nbplayers" class="form-control" [(ngModel)]="RowTableData.joueursMax">
           </div>
           <div class="form-group col-md-2">
             <label for="inputAge">Age</label>
             <input type="number" min="18" max="110" class="form-control" id="inputAge">
           </div>
         </div>
-        <button type="submit" class="btn" style="background-color: red;">Annuler</button>
+        <button type="submit" class="btn" (click)="close()" style="background-color: red;">Annuler</button>
         <button type="submit" class="btn btn-primary">Valider</button>   
       </form>
 </p-dialog>
