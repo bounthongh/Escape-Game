@@ -21,6 +21,7 @@ export class ReservationformComponent implements OnInit {
 
   TableData: any;
   RowTableData: any;
+  Participants: any;
 
   reservate: any;
   displayTable: boolean;
@@ -73,6 +74,8 @@ createForm() {
   ngOnInit() {
     this.TableData = null;
     this.RowTableData = null;
+    this.Participants = null;
+  
     this.rooms = [
       { label: 'Salle Baba 1', value: {name: 'Salle Baba 1', player: '7', vr: 'non'} },
       { label: 'Salle bobo 2', value: {name: 'Salle bobo 2', player: '2',  vr: 'non'} },
