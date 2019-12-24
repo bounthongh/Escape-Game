@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import { Reservate } from '../models/Reservate';
-
+import { DatePipe } from '@angular/common'
 
 @Component({
   selector: 'app-reservationform',
@@ -13,7 +13,7 @@ import { Reservate } from '../models/Reservate';
 
 export class ReservationformComponent implements OnInit {
 
-  Date: Date;
+  Date: string;
   Salle: string;
   Creneaux: string;
   JoueurMax: number;
@@ -112,15 +112,16 @@ createForm() {
     this.generateTable();
   }
 
-  choixDate(event: any)
+  choixDate(event: Date)
   {
-    console.log(event);
-    this.Date = event;
+    
+    this.Date = event.toDateString();
+    console.log(this.Date);
     this.displayTable = true;
     this.generateTable();
   }
 
-  showTable() {
+  showTable(){
     this.displayTable = true;
   }
 

@@ -31,7 +31,11 @@ export class ProductAddComponent implements OnInit {
     '03:00',
     '05:30',
   ];
- 
+  
+
+  
+
+
   day: Number;
   hourlistFinal: string[] = [];
   constructor(private fb: FormBuilder, private ps: ProductsService,
