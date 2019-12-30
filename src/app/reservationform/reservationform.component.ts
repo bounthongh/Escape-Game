@@ -28,7 +28,7 @@ export class ReservationformComponent implements OnInit {
   availableHour = [];
   reservationForm: FormGroup;
   public cols: any[];
-  
+  public minimumDate = new Date();
   public datatable: any[];
 
   headElements = ["Acheteur", "Game", "Spectateur"];
