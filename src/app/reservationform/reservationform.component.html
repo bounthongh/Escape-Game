@@ -23,7 +23,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-i="rowIndex" let-columns="columns">
         <tr [pSelectableRow]="rowData">
-            <td>{{rowData.date}}</td>
+            <td>{{rowData.date | date: 'dd/MM/yyyy'}}</td>
             <td>{{rowData.salle}}</td>
             <td>{{rowData.creneaux}}</td>
             <td>{{rowData.joueursMax}}</td>
@@ -37,7 +37,7 @@
     <form>
         <div class="form-row">
             <div class="form-group col-md-6">
-              <p-calendar formControlName="date" [minDate]="minimumDate" [disabledDates]="invalidDates" placeholder="Date de reservation"></p-calendar>
+              <p-calendar [minDate]="minimumDate" [disabledDates]="invalidDates" placeholder="Date de reservation"></p-calendar>
             </div>
             <div class="form-group col-md-6">
               <select class="form-control"  name="selectcreneaux" [(ngModel)]="RowTableData.creneaux">
@@ -69,13 +69,15 @@
               </select>
           </div>
           <div class="form-group col-md-4">
-            <label for="inputAge">Nb Joueur</label>
-            <input type="number" min="2" max="{{RowTableData.joueursMax}}" name="nbplayers" class="form-control" [(ngModel)]="RowTableData.joueursMax">
+            <label for="inputPlayers">Nb Joueur</label>
+            <select class="form-control"  name="selectplayers" [(ngModel)]="JoueurMax">
+              <option *ngFor="let item of arrayPlayer(JoueurMax)">{{item}}</option>
+            </select>
           </div>
           <div class="form-group col-md-2">
             <label for="inputAge">Age</label>
             <input type="number" min="18" max="110" class="form-control" id="inputAge">
-          </div>
+          </div>       
         </div>
         <button type="submit" class="btn" (click)="close()" style="background-color: red;">Annuler</button>
         <button type="submit" class="btn btn-primary">Valider</button>   

@@ -13,7 +13,7 @@ import { DatePipe } from '@angular/common'
 
 export class ReservationformComponent implements OnInit {
 
-  Date: string;
+  Date: Date;
   Salle: string;
   Creneaux: string;
   JoueurMax: number;
@@ -29,6 +29,7 @@ export class ReservationformComponent implements OnInit {
   reservationForm: FormGroup;
   public cols: any[];
   public minimumDate = new Date();
+  public nbJoueurs = 0;
   public datatable: any[];
 
   headElements = ["Acheteur", "Game", "Spectateur"];
@@ -104,6 +105,13 @@ createForm() {
   ];
     this.displayTable = false;
   }
+
+  onchangenbplayer(event: any)
+  {
+    this.nbJoueurs = event;
+    console.log(this.nbJoueurs);
+  }
+
   choixSalle(event: any)
   {
     console.log(event.value.name);
@@ -118,7 +126,7 @@ createForm() {
   choixDate(event: Date)
   {
     
-    this.Date = event.toDateString();
+    this.Date = event;
     console.log(this.Date);
     this.displayTable = true;
     this.generateTable();
@@ -126,6 +134,18 @@ createForm() {
 
   showTable(){
     this.displayTable = true;
+  }
+
+  arrayPlayer(n: number)
+  {
+    if(n > 2)
+    {
+      return [...Array(n - 1).keys()].map(i => i + 2);
+    }
+    else
+    {
+      return [...Array(1).keys()].map(i => i + 2);
+    }
   }
 
   save(){
