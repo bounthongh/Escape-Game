@@ -68,16 +68,24 @@
                 <option *ngFor="let item of rooms">{{item.value.name}}</option>
               </select>
           </div>
+          <!--
           <div class="form-group col-md-4">
             <label for="inputPlayers">Nb Joueur</label>
-            <select class="form-control"  name="selectplayers" [(ngModel)]="JoueurMax">
+            <select class="form-control"  name="selectplayers" [(ngModel)]="JoueurMax" >
               <option *ngFor="let item of arrayPlayer(JoueurMax)">{{item}}</option>
             </select>
-          </div>
+          </div>-->
           <div class="form-group col-md-2">
             <label for="inputAge">Age</label>
             <input type="number" min="18" max="110" class="form-control" id="inputAge">
-          </div>       
+          </div>
+          <div *ngFor="let item of arrayPlayer(JoueurMax)">
+            <div class="form-group col-md-6">
+              <label>Participant n°{{item - 1}}</label>
+            <div class="form-group col-md-2"><input type="text" placeholder="Prénom"></div>
+            <div class="form-group col-md-3"><input type="text" placeholder="Nom"></div>
+          </div>
+          </div>
         </div>
         <button type="submit" class="btn" (click)="close()" style="background-color: red;">Annuler</button>
         <button type="submit" class="btn btn-primary">Valider</button>   
