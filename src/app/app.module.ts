@@ -19,7 +19,7 @@ import {TableModule} from 'primeng/table';
 import { ChartModule } from 'primeng/chart';
 import {DialogModule} from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
-
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 
 
@@ -52,7 +52,7 @@ import {
   MatTableModule,
   MatTabsModule,
   MatToolbarModule,
-  MatTooltipModule,
+  MatTooltipModule
 
 } from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -113,7 +113,8 @@ import { ReservationformComponent } from './reservationform/reservationform.comp
     MatNativeDateModule,
     CalendarModule,
     DropdownModule,
-    DialogModule
+    DialogModule,
+    NgxJsonViewerModule
 
   ],
   exports: [
