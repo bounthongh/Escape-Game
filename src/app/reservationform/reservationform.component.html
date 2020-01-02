@@ -1,8 +1,6 @@
 <app-navbar></app-navbar>
 <div class="container">
     <div class="row">
-<div class="form-group lightColor">
-    <button type="button3" pButton label="Reserver" style="background-color:#00567c;" (click)="test()"></button>
 <div class="col-6">
     <p-dropdown placeholder="liste des salles" [options]="rooms" (onChange)="choixSalle($event)" id="room" [(ngModel)]="Room"></p-dropdown>
 </div>
@@ -63,12 +61,11 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="inputSalle">Salle</label>
-            <select class="form-control"  [(ngModel)]="RowTableData.salle" name="selectedsalle">
+            <select class="form-control" (change)="onchangeroom($event.target.value)" [(ngModel)]="RowTableData.salle" name="selectedsalle">
               <option selected="{{RowTableData.salle}}">{{RowTableData.salle}}</option>
                 <option *ngFor="let item of rooms">{{item.value.name}}</option>
               </select>
           </div>
-     
           <div class="form-group col-md-4">
             <label for="inputPlayers">Nb Joueur</label>
             <select class="form-control"  name="selectplayers" [(ngModel)]="JoueurMax" >

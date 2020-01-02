@@ -22,7 +22,6 @@ export class ReservationformComponent implements OnInit {
   TableData: any;
   RowTableData: any;
   Participants: any;
-
   reservate: any;
   displayTable: boolean;
   availableHour = [];
@@ -78,9 +77,9 @@ createForm() {
     this.Participants = null;
   
     this.rooms = [
-      { label: 'Salle Baba 1', value: {name: 'Salle Baba 1', player: '7', vr: 'non'} },
-      { label: 'Salle bobo 2', value: {name: 'Salle bobo 2', player: '2',  vr: 'non'} },
-      { label: 'Salle popo 3', value: {name: 'Salle popo 3', player: '4',  vr: 'oui'} },
+      { label: 'Salle Baba1', value: {name: 'Salle Baba1', player: '7', vr: 'non'} },
+      { label: 'Salle bobo2', value: {name: 'Salle bobo2', player: '2',  vr: 'non'} },
+      { label: 'Salle popo3', value: {name: 'Salle popo3', player: '4',  vr: 'oui'} },
       { label: 'Salle koko4', value: {name: 'Salle koko4', player: '6',  vr: 'oui'} }
     ];
 
@@ -110,6 +109,21 @@ createForm() {
   {
     this.nbJoueurs = event;
     console.log(this.nbJoueurs);
+  }
+  onchangeroom(event: any)
+  {
+    this.Salle = event;
+
+    for(let x=0; x < this.rooms.length; x++)
+    {
+      if(this.rooms[x].value.name == this.Salle)
+      {
+        console.log(this.rooms[x].value.player);
+        this.JoueurMax = this.rooms[x].value.player;
+      }
+    }
+
+    console.log(this.Salle);
   }
 
   choixSalle(event: any)
