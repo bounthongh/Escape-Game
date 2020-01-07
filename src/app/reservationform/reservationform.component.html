@@ -76,16 +76,16 @@
             <label for="inputAge">Age</label>
             <input type="number" min="18" max="110" class="form-control" id="inputAge">
           </div>
-          <div *ngFor="let item of arrayPlayer(JoueurMax)">
+          <div *ngFor="let item of arrayPlayer(JoueurMax)" >
             <div class="form-group col-md-6">
               <label>Participant n°{{item - 1}}</label>
-            <div class="form-group col-md-2"><input type="text" placeholder="Prénom"></div>
-            <div class="form-group col-md-3"><input type="text" placeholder="Nom"></div>
+            <div class="form-group col-md-2" ><input type="text" placeholder="Prénom" name="Prenom#" [(ngModel)]="arrayPrenom[item]" ></div>
+            <div class="form-group col-md-3"><input type="text" placeholder="Nom" name="Nom#" [ngModel]="arrayNom[item]"></div>
           </div>
           </div>
         </div>
         <button type="submit" class="btn" (click)="close()" style="background-color: red;">Annuler</button>
-        <button type="submit" class="btn btn-primary">Valider</button>   
+        <button type="submit" class="btn btn-primary" (click)="test()">Valider</button>   
       </form>
 </p-dialog>
 </div>

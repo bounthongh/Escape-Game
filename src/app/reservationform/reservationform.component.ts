@@ -44,6 +44,9 @@ export class ReservationformComponent implements OnInit {
     '03:00',
     '05:30',
   ];
+
+  arrayPrenom: any[];
+  arrayNom: any[];
   selectedHour: any;
   rooms: any[];
   selectedRoom: any;
@@ -75,7 +78,8 @@ createForm() {
     this.TableData = null;
     this.RowTableData = null;
     this.Participants = null;
-  
+    this.arrayPrenom = ['','','','','','',''];
+    this.arrayNom = ['','','','','','',''];
     this.rooms = [
       { label: 'Salle Baba1', value: {name: 'Salle Baba1', player: '7', vr: 'non'} },
       { label: 'Salle bobo2', value: {name: 'Salle bobo2', player: '2',  vr: 'non'} },
@@ -103,6 +107,11 @@ createForm() {
       { field: 'Action', header: 'Action' },
   ];
     this.displayTable = false;
+  }
+
+  test() {
+    console.log(this.arrayPrenom);
+   // console.log(this.arrayNom);
   }
 
   onchangenbplayer(event: any)
