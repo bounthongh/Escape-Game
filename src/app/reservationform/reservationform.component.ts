@@ -124,10 +124,10 @@ createForm() {
     this.arrayPrenom = ['','','','','','',''];
     this.arrayNom = ['','','','','','',''];
     this.rooms = [
-      { label: 'Mariage sans alcool', value: {name: 'Salle Baba1', player: '7', VR: 'NON'} },
-      { label: 'Interminable attente chez le medecin', value: {name: 'Salle bobo2', player: '2',  VR: 'NON'} },
-      { label: 'Greve de la SNCF', value: {name: 'Salle popo3', player: '4',  VR: 'OUI'} },
-      { label: 'Plus de PQ dans les toilettes', value: {name: 'Salle koko4', player: '6',  VR: 'OUI'} }
+      { label: 'Mariage sans alcool', value: {name: 'Mariage sans alcool', player: '7', VR: 'NON'} },
+      { label: 'Interminable attente chez le medecin', value: {name: 'Interminable attente chez le medecin', player: '2',  VR: 'NON'} },
+      { label: 'Greve de la SNCF', value: {name: 'Greve de la SNCF', player: '4',  VR: 'OUI'} },
+      { label: 'Plus de PQ dans les toilettes', value: {name: 'Plus de PQ dans les toilettes', player: '6',  VR: 'OUI'} }
     ];
     this.game = [
       { label: 'Mariage sans alcool', value: 'Mariage sans alcool'},
@@ -254,6 +254,8 @@ onDeleteTranslation(item: any, index: number) {
 
   save(){
     //pousse la donné vers l'api
+
+    console.log(this.RowTableData)
     const value = {
       "Acheteur": this.reservateur,
       "Reservation": this.users,
@@ -269,6 +271,7 @@ onDeleteTranslation(item: any, index: number) {
 
   close(){
     this.displayform=false;
+    this.users= [];
   }
 
   reservation(i) {
@@ -283,7 +286,7 @@ onDeleteTranslation(item: any, index: number) {
     });
     for (let item of this.hourlistFinal)
     {
-      newArray.push({date: this.Date.getTime(), salle: this.Salle, Horaire: item, joueursMax: this.JoueurMax, VR: this.Vr, Nom: this.Game});
+      newArray.push({date: this.Date.getTime(), Nom: this.Salle, Horaire: item, joueursMax: this.JoueurMax, VR: this.Vr});
     }
     this.TableData = newArray;
   }
