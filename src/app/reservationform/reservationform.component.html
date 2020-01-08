@@ -2,10 +2,10 @@
 
 <div class="container">
     <div class="row">
-            <div class="col-4">
+   <!--         <div class="col-4">
                     <p-dropdown placeholder="Jeux" [options]="game" id="room" [(ngModel)]="Game"></p-dropdown>
-                </div>
-<div class="col-4" *ngIf='Game'>
+                </div>-->
+<div class="col-4">
     <p-dropdown placeholder="liste des salles" [options]="rooms" (onChange)="choixSalle($event)" id="room" [(ngModel)]="Room"></p-dropdown>
 </div>
 
@@ -60,7 +60,7 @@
           </div>
           <div class="form-group col-md-4">
               <label for="inputPrenom">Civilite</label>
-              <p-dropdown class="form-control" style="border: none;" [options]="civility" [(ngModel)]="reservateur.Civilite" name="Civilite"></p-dropdown>
+              <p-dropdown [options]="civility" [(ngModel)]="reservateur.Civilite" name="Civilite"></p-dropdown>
             </div>
         </div>
         <div class="form-group">

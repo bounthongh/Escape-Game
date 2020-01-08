@@ -124,10 +124,10 @@ createForm() {
     this.arrayPrenom = ['','','','','','',''];
     this.arrayNom = ['','','','','','',''];
     this.rooms = [
-      { label: 'Salle Baba1', value: {name: 'Salle Baba1', player: '7', VR: 'NON'} },
-      { label: 'Salle bobo2', value: {name: 'Salle bobo2', player: '2',  VR: 'NON'} },
-      { label: 'Salle popo3', value: {name: 'Salle popo3', player: '4',  VR: 'OUI'} },
-      { label: 'Salle koko4', value: {name: 'Salle koko4', player: '6',  VR: 'OUI'} }
+      { label: 'Mariage sans alcool', value: {name: 'Salle Baba1', player: '7', VR: 'NON'} },
+      { label: 'Interminable attente chez le medecin', value: {name: 'Salle bobo2', player: '2',  VR: 'NON'} },
+      { label: 'Greve de la SNCF', value: {name: 'Salle popo3', player: '4',  VR: 'OUI'} },
+      { label: 'Plus de PQ dans les toilettes', value: {name: 'Salle koko4', player: '6',  VR: 'OUI'} }
     ];
     this.game = [
       { label: 'Mariage sans alcool', value: 'Mariage sans alcool'},
@@ -136,7 +136,7 @@ createForm() {
       { label: 'Plus de PQ dans les toilettes', value: 'Plus de PQ dans les toilettes'}
     ]
     this.languages = [];
-    this.civility = [{label: 'Monsieur', value:'Monsieur'}, {label: 'Madame', value:'Madame'}];
+    this.civility = [{label: '', value:''},{label: 'Monsieur', value:'Monsieur'}, {label: 'Madame', value:'Madame'}];
 
     
 
