@@ -55,9 +55,11 @@ export class ReservationformComponent implements OnInit {
   arrayNom: any[];
   selectedHour: any;
   rooms: any[];
+  game: any[];
   users: any[];
   selectedRoom: any;
   day: Number;
+  Game:any;
   hourlistFinal: string[] = [];
   isVr: SelectItem[];
   allPrice: any;
@@ -127,6 +129,12 @@ createForm() {
       { label: 'Salle popo3', value: {name: 'Salle popo3', player: '4',  VR: 'OUI'} },
       { label: 'Salle koko4', value: {name: 'Salle koko4', player: '6',  VR: 'OUI'} }
     ];
+    this.game = [
+      { label: 'Mariage sans alcool', value: 'Mariage sans alcool'},
+      { label: 'Interminable attente chez le medecin', value: 'Interminable attente chez le medecin'},
+      { label: 'Greve de la SNCF', value: 'Greve de la SNCF'},
+      { label: 'Plus de PQ dans les toilettes', value: 'Plus de PQ dans les toilettes'}
+    ]
     this.languages = [];
     this.civility = [{label: 'Monsieur', value:'Monsieur'}, {label: 'Madame', value:'Madame'}];
 
@@ -275,7 +283,7 @@ onDeleteTranslation(item: any, index: number) {
     });
     for (let item of this.hourlistFinal)
     {
-      newArray.push({date: this.Date.getTime(), salle: this.Salle, Horaire: item, joueursMax: this.JoueurMax, VR: this.Vr});
+      newArray.push({date: this.Date.getTime(), salle: this.Salle, Horaire: item, joueursMax: this.JoueurMax, VR: this.Vr, Nom: this.Game});
     }
     this.TableData = newArray;
   }

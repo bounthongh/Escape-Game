@@ -1,13 +1,18 @@
 <app-navbar></app-navbar>
+
 <div class="container">
     <div class="row">
-<div class="col-6">
+            <div class="col-4">
+                    <p-dropdown placeholder="Jeux" [options]="game" id="room" [(ngModel)]="Game"></p-dropdown>
+                </div>
+<div class="col-4" *ngIf='Game'>
     <p-dropdown placeholder="liste des salles" [options]="rooms" (onChange)="choixSalle($event)" id="room" [(ngModel)]="Room"></p-dropdown>
 </div>
-<div class="col-6">
+
+<div class="col-4">
     <p-calendar [minDate]="minimumDate" [disabledDates]="invalidDates" [(ngModel)]="Date" id="date" placeholder="Date de reservation" (onSelect)="choixDate($event)" *ngIf="Room" dateFormat="dd.mm.yy"></p-calendar>
 </div>
-<div class="col-6">
+<div class="col-12">
 <p-table #dt *ngIf="Date" [columns]="cols" [value]="TableData" [paginator]="true" [rows]="20">
     <ng-template pTemplate="caption">
         Reservation
@@ -31,7 +36,7 @@
     </ng-template>
   </p-table>
   </div>
-  <p-dialog [style]="{width: '500px', minWidth: '400px'}" *ngIf="RowTableData" header="Formulaire de réservation" [(visible)]="displayform" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '20%'}">
+  <p-dialog [style]="{width: '80%', minWidth: '400px'}" *ngIf="RowTableData" header="Formulaire de réservation" [(visible)]="displayform" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '50%'}">
     <form>
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -54,10 +59,9 @@
             <input type="text" class="form-control" name="inputPrenom" [(ngModel)]="reservateur.Prenom" placeholder="Prénom">
           </div>
           <div class="form-group col-md-4">
-              <label for="inputPrenom">Prénom</label>
-              <p-dropdown [options]="civility" [(ngModel)]="reservateur.Civilite" name="Civilite"></p-dropdown>
+              <label for="inputPrenom">Civilite</label>
+              <p-dropdown class="form-control" style="border: none;" [options]="civility" [(ngModel)]="reservateur.Civilite" name="Civilite"></p-dropdown>
             </div>
-          
         </div>
         <div class="form-group">
           <label for="inputEmail">E-Mail</label>
@@ -92,58 +96,36 @@
               <p-table [value]="users">
                   <ng-template pTemplate="body" let-user let-ri="rowIndex">
                       <tr>
-                          <td pEditableColumn>
-                              <p-cellEditor>
-                                  <ng-template pTemplate="input">
-                                      <input pInputText type="text" placeholder="nom" name="nom"
-                                      [(ngModel)]="user.nom">
-                                  </ng-template>
-                                  <ng-template pTemplate="output">
-                                      {{user.nom}}
-                                  </ng-template>
-                              </p-cellEditor>
+                          <td>     
+                                <input pInputText type="text" placeholder="nom" name="nom"
+                                [(ngModel)]="user.nom">
                           </td>
-                          <td pEditableColumn>
-                              <p-cellEditor>
-                                  <ng-template pTemplate="input">
+                          <td>
+                              
+                                 
                                       <input pInputText type="text" placeholder="prenom" name="prenom"
                                           [(ngModel)]="user.prenom">
-                                  </ng-template>
-                                  <ng-template pTemplate="output">
-                                      {{user.prenom}}
-                                  </ng-template>
-                              </p-cellEditor>
+                                  
+                            
                           </td>
-                          <td pEditableColumn>
-                              <p-cellEditor>
-                                  <ng-template pTemplate="input">
+                          <td>
+                              
+                                 
                                       <p-dropdown [options]="civility" [(ngModel)]="user.civility" name="civility"></p-dropdown>
-                                  </ng-template>
-                                  <ng-template pTemplate="output">
-                                      {{user.civility}}
-                                  </ng-template>
-                              </p-cellEditor>
+                                  
                           </td>
-                          <td pEditableColumn>
-                              <p-cellEditor>
-                                  <ng-template pTemplate="input">
+                          <td>
+                              
+                                 
                                       <input pInputText type="text" min="18" placeholder="age" name="age"
                                           [(ngModel)]="user.age">
-                                  </ng-template>
-                                  <ng-template pTemplate="output">
-                                      {{user.age}}
-                                  </ng-template>
-                              </p-cellEditor>
+                                 
                           </td>
-                          <td pEditableColumn>
-                              <p-cellEditor>
-                                  <ng-template pTemplate="input">
+                          <td>
+                              
+                                 
                                       <p-dropdown [options]="allPrice.label" [(ngModel)]="user.tarif" name="tarif"></p-dropdown>
-                                  </ng-template>
-                                  <ng-template pTemplate="output">
-                                      {{user.tarif}}
-                                  </ng-template>
-                              </p-cellEditor>
+                          
                           </td>
                           <!--<td style="text-align: center">
                               <i  icon="pi pi-plus" style="cursor: pointer; font-size: 18px;"
@@ -164,6 +146,7 @@
           </div>
           </div>-->
         </div>
+        <br/>
         <button type="submit" class="btn" (click)="close()" style="background-color: red;">Annuler</button>
         <button type="submit" class="btn btn-primary" (click)="save()">Valider</button>   
       </form>
