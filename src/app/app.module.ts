@@ -60,6 +60,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ManagerPriceComponent } from './manager-price/manager-price.component';
 import { StatsComponent } from './stats/stats.component';
 import { ReservationformComponent } from './reservationform/reservationform.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,9 @@ import { ReservationformComponent } from './reservationform/reservationform.comp
     NavbarComponent,
     ManagerPriceComponent,
     StatsComponent,
-    ReservationformComponent
+    ReservationformComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
