@@ -78,6 +78,7 @@ export class ProductAddComponent implements OnInit {
           this.hourlistFinal.push(element);
         }
       });
+      console.log(this.hourlistFinal)
     }, err => {
       console.log(err)
     });

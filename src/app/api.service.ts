@@ -31,7 +31,6 @@ export class ApiService {
     return this.http.get(this.baseURL+price, {responseType: 'json'});
   }
   public updatePrice(price: any) {
-    console.log(price)
     const priceUrl = "price/update";
     return this.http.put(this.baseURL+priceUrl,price, {responseType: 'json'});
   }
@@ -42,8 +41,12 @@ export class ApiService {
   }
 
   public getBookingByDay(day: Number) {
-    const reservation = "reservation/";
+    const reservation = "reservation/getReservation/";
     return this.http.get(this.baseURL+reservation+day, {responseType: 'json'});
   }
 
+  public saveGameClient(data) {
+    const reservation = "reservation/reservationAdd";
+    return this.http.post(this.baseURL+reservation, data,{responseType: 'json'});
+  }
 }

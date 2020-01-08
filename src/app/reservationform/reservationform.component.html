@@ -23,9 +23,9 @@
         <tr [pSelectableRow]="rowData">
             <td>{{rowData.date | date: 'dd/MM/yyyy'}}</td>
             <td>{{rowData.salle}}</td>
-            <td>{{rowData.creneaux}}</td>
+            <td>{{rowData.Horaire}}</td>
             <td>{{rowData.joueursMax}}</td>
-            <td>{{rowData.vr}}</td>
+            <td>{{rowData.VR}}</td>
             <td><button type="button3" pButton label="Reserver" style="background-color:#00567c;" (click)="reservation(i)"></button></td>
         </tr>
     </ng-template>
@@ -35,28 +35,33 @@
     <form>
         <div class="form-row">
             <div class="form-group col-md-6">
-              <p-calendar [minDate]="minimumDate" [disabledDates]="invalidDates" placeholder="Date de reservation"></p-calendar>
+              <p-calendar [minDate]="minimumDate" [(ngModel)]="Date" name="calendar" [disabledDates]="invalidDates" placeholder="Date de reservation"></p-calendar>
             </div>
             <div class="form-group col-md-6">
-              <select class="form-control"  name="selectcreneaux" [(ngModel)]="RowTableData.creneaux">
-                <option selected="{{RowTableData.creneaux}}">{{RowTableData.creneaux}}</option>
+              <select class="form-control"  name="selectcreneaux" [(ngModel)]="RowTableData.Horaire">
+                <option selected="{{RowTableData.Horaire}}">{{RowTableData.Horaire}}</option>
                   <option *ngFor="let item of hourlist">{{item.value}}</option>
                 </select>
             </div>
           </div>
         <div class="form-row">
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-4">
             <label for="inputNom">Nom</label>
-            <input type="text" class="form-control" name="inputNom" placeholder="Nom">
+            <input type="text" class="form-control" name="inputNom" [(ngModel)]="reservateur.Nom" placeholder="Nom">
           </div>
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-4">
             <label for="inputPrenom">Prénom</label>
-            <input type="text" class="form-control" name="inputPrenom" placeholder="Prénom">
+            <input type="text" class="form-control" name="inputPrenom" [(ngModel)]="reservateur.Prenom" placeholder="Prénom">
           </div>
+          <div class="form-group col-md-4">
+              <label for="inputPrenom">Prénom</label>
+              <p-dropdown [options]="civility" [(ngModel)]="reservateur.Civilite" name="Civilite"></p-dropdown>
+            </div>
+          
         </div>
         <div class="form-group">
           <label for="inputEmail">E-Mail</label>
-          <input type="email" class="form-control" name="inputEmail" placeholder="blabla@chocolat.com">
+          <input type="email" class="form-control" name="inputEmail" [(ngModel)]="reservateur.Email" placeholder="blabla@chocolat.com">
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -74,18 +79,93 @@
           </div>
           <div class="form-group col-md-2">
             <label for="inputAge">Age</label>
-            <input type="number" min="18" max="110" class="form-control" id="inputAge">
+            <input type="number" min="18" max="110" class="form-control" name="inputAge" [(ngModel)]="reservateur.Age" id="inputAge">
           </div>
-          <div *ngFor="let item of arrayPlayer(JoueurMax)" >
+
+
+          <div class="ui-grid-col-1" style="padding: 5px;">
+              <button pButton type="button" icon="pi pi-plus"
+                  (click)="onAddUsers()"></button>
+          </div>
+          
+          <div class="ui-grid-col-12">
+              <p-table [value]="users">
+                  <ng-template pTemplate="body" let-user let-ri="rowIndex">
+                      <tr>
+                          <td pEditableColumn>
+                              <p-cellEditor>
+                                  <ng-template pTemplate="input">
+                                      <input pInputText type="text" placeholder="nom" name="nom"
+                                      [(ngModel)]="user.nom">
+                                  </ng-template>
+                                  <ng-template pTemplate="output">
+                                      {{user.nom}}
+                                  </ng-template>
+                              </p-cellEditor>
+                          </td>
+                          <td pEditableColumn>
+                              <p-cellEditor>
+                                  <ng-template pTemplate="input">
+                                      <input pInputText type="text" placeholder="prenom" name="prenom"
+                                          [(ngModel)]="user.prenom">
+                                  </ng-template>
+                                  <ng-template pTemplate="output">
+                                      {{user.prenom}}
+                                  </ng-template>
+                              </p-cellEditor>
+                          </td>
+                          <td pEditableColumn>
+                              <p-cellEditor>
+                                  <ng-template pTemplate="input">
+                                      <p-dropdown [options]="civility" [(ngModel)]="user.civility" name="civility"></p-dropdown>
+                                  </ng-template>
+                                  <ng-template pTemplate="output">
+                                      {{user.civility}}
+                                  </ng-template>
+                              </p-cellEditor>
+                          </td>
+                          <td pEditableColumn>
+                              <p-cellEditor>
+                                  <ng-template pTemplate="input">
+                                      <input pInputText type="text" min="18" placeholder="age" name="age"
+                                          [(ngModel)]="user.age">
+                                  </ng-template>
+                                  <ng-template pTemplate="output">
+                                      {{user.age}}
+                                  </ng-template>
+                              </p-cellEditor>
+                          </td>
+                          <td pEditableColumn>
+                              <p-cellEditor>
+                                  <ng-template pTemplate="input">
+                                      <p-dropdown [options]="allPrice.label" [(ngModel)]="user.tarif" name="tarif"></p-dropdown>
+                                  </ng-template>
+                                  <ng-template pTemplate="output">
+                                      {{user.tarif}}
+                                  </ng-template>
+                              </p-cellEditor>
+                          </td>
+                          <!--<td style="text-align: center">
+                              <i  icon="pi pi-plus" style="cursor: pointer; font-size: 18px;"
+                                  (click)="onDeleteUser(user, ri)"></i>
+                          </td>-->
+                      </tr>
+                  </ng-template>
+              </p-table>
+          </div>
+
+
+
+         <!-- <div *ngFor="let item of arrayPlayer(JoueurMax)" >
             <div class="form-group col-md-6">
               <label>Participant n°{{item - 1}}</label>
             <div class="form-group col-md-2" ><input type="text" placeholder="Prénom" name="Prenom#" [(ngModel)]="arrayPrenom[item]" ></div>
             <div class="form-group col-md-3"><input type="text" placeholder="Nom" name="Nom#" [ngModel]="arrayNom[item]"></div>
           </div>
-          </div>
+          </div>-->
         </div>
         <button type="submit" class="btn" (click)="close()" style="background-color: red;">Annuler</button>
-        <button type="submit" class="btn btn-primary" (click)="test()">Valider</button>   
+        <button type="submit" class="btn btn-primary" (click)="save()">Valider</button>   
       </form>
 </p-dialog>
 </div>

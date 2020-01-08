@@ -19,6 +19,7 @@ import {TableModule} from 'primeng/table';
 import { ChartModule } from 'primeng/chart';
 import {DialogModule} from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
+import {SplitButtonModule} from 'primeng/splitbutton';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 
@@ -113,6 +114,7 @@ import { ReservationformComponent } from './reservationform/reservationform.comp
     MatNativeDateModule,
     CalendarModule,
     DropdownModule,
+    SplitButtonModule,
     DialogModule,
     NgxJsonViewerModule
 

@@ -31,19 +31,20 @@ route.route('/').get(function (req, res) {
 });
 
 // Get hours booking
-/*route.route('/:day').get(function (req, res) {
+route.route('/getReservation/:day').get(function (req, res) {
   const id = req.params.day;
   const item = {
     "day": id
   }
   const arrayHours = [];
   Reservation.find(item, function (err, result){
-    result.forEach(element => {
-      arrayHours.push(element.hours);
-    });
-      res.json(arrayHours);
+      result.forEach(element => {
+        arrayHours.push(element.hours);
+      });
+    
+  res.json(arrayHours);
   });
-});*/
+});
 
 route.route('/reservationAdd').post(function (req, res) {
   let reservate_ = new Reservate(req.body);

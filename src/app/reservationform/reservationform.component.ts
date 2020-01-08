@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import { Reservate } from '../models/Reservate';
 import { DatePipe } from '@angular/common'
+// import { SelectItem } from 'primeng/api/selectitem';
+import { SelectItem, MenuItem } from 'primeng/primeng';
+import { isNullOrUndefined } from 'util';
+import { LabelOptions } from '@angular/material';
 
 @Component({
   selector: 'app-reservationform',
@@ -30,6 +34,7 @@ export class ReservationformComponent implements OnInit {
   public minimumDate = new Date();
   public nbJoueurs = 0;
   public datatable: any[];
+  public languages: MenuItem[];
 
   headElements = ["Acheteur", "Game", "Spectateur"];
 
@@ -45,17 +50,29 @@ export class ReservationformComponent implements OnInit {
     '05:30',
   ];
 
+  civility: SelectItem[];
   arrayPrenom: any[];
   arrayNom: any[];
   selectedHour: any;
   rooms: any[];
+  users: any[];
   selectedRoom: any;
   day: Number;
   hourlistFinal: string[] = [];
+  isVr: SelectItem[];
+  allPrice: any;
 
   displayform: boolean = false;
+  angForm: FormGroup;
+  reservateur:any = {
+    Nom: '',
+    Prenom: '',
+    Age: 0,
+    Email: '',
+    Civilite: ''
+  }
 
-  constructor(private router: Router, private ps: ApiService, private fb: FormBuilder) {
+  constructor(private router: Router, private ps: ApiService, private fb: FormBuilder, private apiService: ApiService) {
     /*this.ps
     .getAllBooking()
     .subscribe((data: Reservate[]) => {
@@ -73,7 +90,31 @@ createForm() {
     ProductDescription: ['', Validators.required ],
     ProductPrice: ['', Validators.required ]
   });*/
+  this.apiService.getPrice().subscribe(res => {
+    const data = Object.values(res)
+    const price = [];
+    const label = [];
+    
+    data.forEach(element => {
+      price.push(element.price);
+      
+      
+      label.push(element.tarif);
+    });
+
+    const pricesObject = price.map(value => ({'label': value, 'value': value}));
+    const labelPricesObject = label.map(value => ({'label': value, 'value': value}));
+    this.allPrice = { 
+      'price': pricesObject,
+      'label': labelPricesObject
+    };
+    err => {
+      console.error(err);
+    }
+  })
 }
+
+
   ngOnInit() {
     this.TableData = null;
     this.RowTableData = null;
@@ -81,13 +122,17 @@ createForm() {
     this.arrayPrenom = ['','','','','','',''];
     this.arrayNom = ['','','','','','',''];
     this.rooms = [
-      { label: 'Salle Baba1', value: {name: 'Salle Baba1', player: '7', vr: 'non'} },
-      { label: 'Salle bobo2', value: {name: 'Salle bobo2', player: '2',  vr: 'non'} },
-      { label: 'Salle popo3', value: {name: 'Salle popo3', player: '4',  vr: 'oui'} },
-      { label: 'Salle koko4', value: {name: 'Salle koko4', player: '6',  vr: 'oui'} }
+      { label: 'Salle Baba1', value: {name: 'Salle Baba1', player: '7', VR: 'NON'} },
+      { label: 'Salle bobo2', value: {name: 'Salle bobo2', player: '2',  VR: 'NON'} },
+      { label: 'Salle popo3', value: {name: 'Salle popo3', player: '4',  VR: 'OUI'} },
+      { label: 'Salle koko4', value: {name: 'Salle koko4', player: '6',  VR: 'OUI'} }
     ];
+    this.languages = [];
+    this.civility = [{label: 'Monsieur', value:'Monsieur'}, {label: 'Madame', value:'Madame'}];
 
-    this.hourlist = [ 
+    
+
+    /*this.hourlist = [ 
       {label: '08:00', value: '08:00'},
       {label: '10:00', value: '10:00'},
       {label: '12:30', value: '12:30'},
@@ -96,7 +141,12 @@ createForm() {
       {label: '21:30', value: '21:30'},
       {label: '00:00', value: '00:00'},
       {label: '03:00', value: '03:00'},
-      {label: '05:30', value: '05:30'}];
+      {label: '05:30', value: '05:30'}];*/
+
+      this.isVr = [
+        {label: 'OUI', value: 'Yes'},
+        {label: 'NON', value: 'No'},
+      ]
 
     this.cols = [
       { field: 'date', header: 'Date' },
@@ -108,10 +158,27 @@ createForm() {
   ];
     this.displayTable = false;
   }
-
+  
+  onAddUsers() {
+    if (isNullOrUndefined(this.users)) {
+      this.users = [];
+    }
+    if (this.users.length < this.JoueurMax) {
+        this.users.push({
+            nom: '',
+            prenom: '',
+            civility: 'Madame',
+            age: 0,
+            tarif: ''
+        });
+      }
+}
+onDeleteTranslation(item: any, index: number) {
+  this.users.splice(index, 1);
+}
   test() {
-    console.log(this.arrayPrenom);
-   // console.log(this.arrayNom);
+    
+
   }
 
   onchangenbplayer(event: any)
@@ -131,18 +198,13 @@ createForm() {
         this.JoueurMax = this.rooms[x].value.player;
       }
     }
-
-    console.log(this.Salle);
   }
 
   choixSalle(event: any)
   {
-    console.log(event.value.name);
-    console.log(event.value.vr);
-    console.log(event.value.player);
     this.Salle = event.value.name;
     this.JoueurMax = event.value.player;
-    this.Vr = event.value.vr;
+    this.Vr = event.value.VR;
     this.generateTable();
   }
 
@@ -150,9 +212,20 @@ createForm() {
   {
     
     this.Date = event;
-    console.log(this.Date);
+    const day = this.Date.getTime();
+    this.apiService.getBookingByDay(day).subscribe(res => {
+      this.hourlistFinal = [];
+      const unavalable = Object.values(res);
+      this.hourlist.forEach(element => {
+        if (unavalable.indexOf(element) < 0) {
+          this.hourlistFinal.push(element);
+        }
+      });
+      this.generateTable();
+    }, err => {
+      console.log(err)
+    });
     this.displayTable = true;
-    this.generateTable();
   }
 
   showTable(){
@@ -173,6 +246,17 @@ createForm() {
 
   save(){
     //pousse la donné vers l'api
+    const value = {
+      "Acheteur": this.reservateur,
+      "Reservation": this.users,
+      "Game": this.RowTableData
+    }
+    this.apiService.saveGameClient(value).subscribe(res => {
+      console.log(res),
+      err => {
+        console.warn(err);
+      }
+    })
   }
 
   close(){
@@ -181,19 +265,18 @@ createForm() {
 
   reservation(i) {
     this.displayform = true;
-    console.log(i);
     this.RowTableData = this.TableData[i];
     //ouverture du form avec les données du tableaux
   }
 
   generateTable() {
     var newArray = [];
-    for (let item of this.hourlist)
+    this.hourlistFinal.forEach(element => {
+    });
+    for (let item of this.hourlistFinal)
     {
-      console.log('hello');
-      newArray.push({date: this.Date, salle: this.Salle, creneaux: item.value, joueursMax: this.JoueurMax, vr: this.Vr});
+      newArray.push({date: this.Date.getTime(), salle: this.Salle, Horaire: item, joueursMax: this.JoueurMax, VR: this.Vr});
     }
-    console.log(newArray);
     this.TableData = newArray;
   }
 }
