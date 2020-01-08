@@ -10,6 +10,7 @@ const express = require('express'),
    const productRoute = require('./routes/product.route');
    const reservationRoute = require('./routes/reservation.route');
    const priceRoute = require('./routes/price.route');
+   const userRoutes = require('./routes/user');
     mongoose.Promise = global.Promise;
     mongoose.connect(config.DB, { useNewUrlParser: true }).then(
       () => {console.log('Database is connected') },
@@ -22,6 +23,7 @@ const express = require('express'),
     app.use('/products', productRoute);
     app.use('/reservation', reservationRoute);
     app.use('/price', priceRoute);
+    app.use('/api/auth', userRoutes);
     const port = process.env.PORT || 4000;
 
     const server = app.listen(port, function(){
