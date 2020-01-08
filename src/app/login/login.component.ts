@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     this.auth.login(email, password).then(
       () => {
         this.loading = false;
-        this.router.navigate(['/userget']);
+        this.router.navigate(['/products']);
       }
     ).catch(
       (error) => {

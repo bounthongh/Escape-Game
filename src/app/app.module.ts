@@ -1,3 +1,4 @@
+import { AuthGuard } from './service/auth-guard.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -128,7 +129,7 @@ import { SignupComponent } from './signup/signup.component';
   ],
 
   entryComponents: [ ],
-  providers: [ProductsService, ApiService],
+  providers: [ProductsService, ApiService, AuthGuard],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   bootstrap: [AppComponent],
 })
