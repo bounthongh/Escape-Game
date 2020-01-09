@@ -35,7 +35,6 @@ export class ReservationformComponent implements OnInit {
   public nbJoueurs = 0;
   public datatable: any[];
   public languages: MenuItem[];
-
   headElements = ["Acheteur", "Game", "Spectateur"];
 
   hourlist: any[] = [
@@ -75,23 +74,7 @@ export class ReservationformComponent implements OnInit {
   }
 
   constructor(private router: Router, private ps: ApiService, private fb: FormBuilder, private apiService: ApiService) {
-    /*this.ps
-    .getAllBooking()
-    .subscribe((data: Reservate[]) => {
-      this.reservate = data;
-      this.displayform = false;
-  });*/
-    //this.createForm();
-    //let today = new Date();
-    //this.Date = today.getMonth() + '/' + today.getDate() + '/' + today.getFullYear();
- /* }
 
-createForm() {
-  this.reservationForm = this.fb.group({
-    ProductName: ['', Validators.required ],
-    ProductDescription: ['', Validators.required ],
-    ProductPrice: ['', Validators.required ]
-  });*/
   this.apiService.getPrice().subscribe(res => {
     const data = Object.values(res)
     const price = [];
@@ -99,8 +82,6 @@ createForm() {
     
     data.forEach(element => {
       price.push(element.price);
-      
-      
       label.push(element.tarif);
     });
 
@@ -115,7 +96,6 @@ createForm() {
     }
   })
 }
-
 
   ngOnInit() {
     this.TableData = null;
@@ -137,9 +117,6 @@ createForm() {
     ]
     this.languages = [];
     this.civility = [{label: '', value:''},{label: 'Monsieur', value:'Monsieur'}, {label: 'Madame', value:'Madame'}];
-
-    
-
     /*this.hourlist = [ 
       {label: '08:00', value: '08:00'},
       {label: '10:00', value: '10:00'},
@@ -155,7 +132,6 @@ createForm() {
         {label: 'OUI', value: 'Yes'},
         {label: 'NON', value: 'No'},
       ]
-
     this.cols = [
       { field: 'date', header: 'Date' },
       { field: 'selectedrooms', header: 'Salle' },
@@ -166,7 +142,6 @@ createForm() {
   ];
     this.displayTable = false;
   }
-  
   onAddUsers() {
     if (isNullOrUndefined(this.users)) {
       this.users = [];
@@ -184,14 +159,10 @@ createForm() {
 onDeleteTranslation(item: any, index: number) {
   this.users.splice(index, 1);
 }
-  test() {
-    
-
-  }
-
   onchangenbplayer(event: any)
   {
     this.nbJoueurs = event;
+    this.users= [];
     console.log(this.nbJoueurs);
   }
   onchangeroom(event: any)
@@ -206,6 +177,7 @@ onDeleteTranslation(item: any, index: number) {
         this.JoueurMax = this.rooms[x].value.player;
       }
     }
+    this.users= [];
   }
 
   choixSalle(event: any)
@@ -244,10 +216,18 @@ onDeleteTranslation(item: any, index: number) {
   {
     if(n > 2)
     {
+      if(this.users && this.users.length > n)
+      {
+        this.users= [];
+      }
       return [...Array(n - 1).keys()].map(i => i + 2);
     }
     else
     {
+      if(this.users && this.users.length > n)
+      {
+        this.users= [];
+      }
       return [...Array(1).keys()].map(i => i + 2);
     }
   }
