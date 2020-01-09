@@ -5,12 +5,12 @@ html,body{
 background-size: cover;
 background-repeat: no-repeat;
 min-height: 100vh;
+background-image: url("/assets/background.jpg");
     height: auto;
     margin: 0;
   /*  background: #00567c !important;*/
 font-family: 'Numans', sans-serif;
 }
-
 
 .container{
     padding-top: 5%;
