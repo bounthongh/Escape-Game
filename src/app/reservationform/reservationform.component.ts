@@ -49,7 +49,7 @@ export class ReservationformComponent implements OnInit {
     '05:30',
   ];
 
-  civility: SelectItem[];
+  Civilite: SelectItem[];
   arrayPrenom: any[];
   arrayNom: any[];
   selectedHour: any;
@@ -116,7 +116,7 @@ export class ReservationformComponent implements OnInit {
       { label: 'Plus de PQ dans les toilettes', value: 'Plus de PQ dans les toilettes'}
     ]
     this.languages = [];
-    this.civility = [{label: '', value:''},{label: 'Monsieur', value:'Monsieur'}, {label: 'Madame', value:'Madame'}];
+    this.Civilite = [{label: '', value:''},{label: 'Monsieur', value:'Monsieur'}, {label: 'Madame', value:'Madame'}];
     /*this.hourlist = [ 
       {label: '08:00', value: '08:00'},
       {label: '10:00', value: '10:00'},
@@ -150,8 +150,8 @@ export class ReservationformComponent implements OnInit {
         this.users.push({
             nom: '',
             prenom: '',
-            civility: 'Madame',
-            age: 0,
+            Civilite: 'Madame',
+            Age: 0,
             tarif: ''
         });
       }
@@ -235,10 +235,11 @@ onDeleteTranslation(item: any, index: number) {
   save(){
     //pousse la donné vers l'api
 
-    console.log(this.RowTableData)
+    console.log(this.RowTableData);
+    const Spectateur = {"Spectateur": this.users };
     const value = {
       "Acheteur": this.reservateur,
-      "Reservation": this.users,
+      "Reservation": Spectateur,
       "Game": this.RowTableData
     }
     this.apiService.saveGameClient(value).subscribe(res => {

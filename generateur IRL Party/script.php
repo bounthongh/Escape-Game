@@ -57,7 +57,7 @@ while (true) {
 
     echo(json_encode($result));
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "localhost:4000/reservation/reservationAdd");
+    curl_setopt($ch, CURLOPT_URL, "http://localhost:4000/reservation/reservationAdd");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
     curl_setopt($ch, CURLOPT_POST, 1);

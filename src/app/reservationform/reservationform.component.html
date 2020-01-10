@@ -56,8 +56,8 @@
             <input type="text" class="form-control" name="inputPrenom" [(ngModel)]="reservateur.Prenom" placeholder="Prénom">
           </div>
           <div class="form-group col-md-4">
-              <label for="inputPrenom">Prénom</label>
-              <p-dropdown [options]="civility" [(ngModel)]="reservateur.Civilite" name="Civilite"></p-dropdown>
+              <label for="inputPrenom">Civilite</label>
+              <p-dropdown [options]="Civilite" [(ngModel)]="reservateur.Civilite" name="Civilite"></p-dropdown>
             </div>
           
         </div>
@@ -119,10 +119,10 @@
                           <td pEditableColumn>
                               <p-cellEditor>
                                   <ng-template pTemplate="input">
-                                      <p-dropdown [options]="civility" [(ngModel)]="user.civility" name="civility"></p-dropdown>
+                                      <p-dropdown [options]="Civilite" [(ngModel)]="user.Civilite" name="Civilite"></p-dropdown>
                                   </ng-template>
                                   <ng-template pTemplate="output">
-                                      {{user.civility}}
+                                      {{user.Civilite}}
                                   </ng-template>
                               </p-cellEditor>
                           </td>
@@ -130,10 +130,10 @@
                               <p-cellEditor>
                                   <ng-template pTemplate="input">
                                       <input pInputText type="text" min="18" placeholder="age" name="age"
-                                          [(ngModel)]="user.age">
+                                          [(ngModel)]="user.Age">
                                   </ng-template>
                                   <ng-template pTemplate="output">
-                                      {{user.age}}
+                                      {{user.Age}}
                                   </ng-template>
                               </p-cellEditor>
                           </td>

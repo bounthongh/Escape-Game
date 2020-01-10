@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Reservate } from '../models/Reservate';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-stats',
@@ -37,11 +38,15 @@ export class StatsComponent implements OnInit {
 
     data.forEach(element => {
       element.Reservation.forEach(item => {
-        if(item['Spectateur'].Civilite === 'Madame') {
-          Madame.push(item['Spectateur'].Civilite);
-        } else {
-          Monsieurs.push(item['Spectateur'].Civilite);
+        if (!isNullOrUndefined(item['Spectateur'])) {
+          if(item['Spectateur'].Civilite === 'Madame') {
+            Madame.push(item['Spectateur'].Civilite);
+          } else {
+            Monsieurs.push(item['Spectateur'].Civilite);
+          }
         }
+
+        if (!isNullOrUndefined(item['Spectateur'].Age )) {
         if(item['Spectateur'].Age < 18) {
           mineurs = mineurs + 1;
         } else if (item['Spectateur'].Age >=18 && item['Spectateur'].Age <= 25) {
@@ -51,6 +56,7 @@ export class StatsComponent implements OnInit {
         }else if (item['Spectateur'].Age > 40) {
            vieux = vieux + 1;
         }
+      }
 
       });
       if(element['Game'].VR === 'Oui') {
